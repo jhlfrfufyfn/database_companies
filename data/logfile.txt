@@ -39,3 +39,52 @@ FINE: Query 2, branch: FREEZERS, companies found: 1
 сент. 30, 2020 4:09:59 PM com.bsu.Main queryCycle
 FINE: Query 1, short name: bEl+Az, companies found: 0
 
+сент. 30, 2020 4:41:23 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 4:41:41 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 4:42:03 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: death, companies found: 1
+
+сент. 30, 2020 4:42:15 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: freezers, companies found: 0
+
+сент. 30, 2020 4:42:39 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: death, companies found: 1
+
+сент. 30, 2020 4:42:56 PM com.bsu.Main queryCycle
+FINE: Query 4, dates: 01-01-1900 , 01-01-2000, companies found: 0
+
+сент. 30, 2020 8:03:51 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 8:04:21 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: , companies found: 1
+
+сент. 30, 2020 8:05:03 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 8:05:10 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: leb_az, companies found: 1
+
+сент. 30, 2020 8:05:15 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: bel_az, companies found: 1
+
+сент. 30, 2020 8:05:21 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: BEL+AZ, companies found: 0
+
+сент. 30, 2020 8:05:28 PM com.bsu.Main queryCycle
+FINE: Query 2, branch: FreeseRS, companies found: 0
+
+сент. 30, 2020 8:05:38 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: FreeSeRS, companies found: 0
+
+сент. 30, 2020 8:05:59 PM com.bsu.Main queryCycle
+FINE: Query 4, dates: 01-01-1920 , 01-01-1960, companies found: 0
+
+сент. 30, 2020 8:06:06 PM com.bsu.Main queryCycle
+FINE: Query 5, employee numbers: 1000 , 10000, companies found: 2
+
+сент. 30, 2020 8:09:15 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 8:09:38 PM com.bsu.Main queryCycle
+FINE: Query 4, dates: 01-01-1995 , 01-10-2200, companies found: 0
+

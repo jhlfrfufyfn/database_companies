@@ -1,5 +1,7 @@
 package com.bsu;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -33,12 +35,11 @@ class Company {
         webPage = aData[11];
     }
 
-    void print() {
-        System.out.println(name + ",  " + shortName + ",  " + actualizationDate.toString() + ",  "
-                + address + ",  " + foundationDate.toString() + ",  " + employeeNumber + ",  "
-                + auditor + ",  " + phoneNumber + ",  " + eMail + ",  " + branch + ",  " + activityType + ",  "
-                + webPage + ";");
-        System.out.print('\n');
+    void print(FileWriter fw) throws IOException {
+        fw.write(name + ";" + shortName + ";" + actualizationDate.toString() + ";"
+                + address + ";" + foundationDate.toString() + ";" + employeeNumber + ";"
+                + auditor + ";" + phoneNumber + ";" + eMail + ";" + branch + ";" + activityType + ";"
+                + webPage + ";" + System.lineSeparator());
     }
 
 }
