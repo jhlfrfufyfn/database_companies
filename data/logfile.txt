@@ -31,3 +31,11 @@ FINE: Query 5, employee numbers: 100 , 10000, companies found: 2
 сент. 30, 2020 4:03:25 PM com.bsu.Main queryCycle
 FINE: Query 2, branch: Star destroyers, companies found: 1
 
+сент. 30, 2020 4:09:38 PM com.bsu.Main main
+FINE: Program started 
+сент. 30, 2020 4:09:49 PM com.bsu.Main queryCycle
+FINE: Query 2, branch: FREEZERS, companies found: 1
+
+сент. 30, 2020 4:09:59 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: bEl+Az, companies found: 0
+

@@ -15,7 +15,6 @@ import java.util.logging.SimpleFormatter;
 
 import static java.lang.System.exit;
 
-///TODO: add logger
 ///TODO: add encountering capital symbols
 public class Main {
 
@@ -72,7 +71,7 @@ public class Main {
 
     private static void queryCycle(Scanner cin, List<Company> records) throws ParseException {
         while (true) {
-            System.out.println("Enter the query number(entering 0 means the end of the program): ");
+            System.out.println("Enter the query number(enter 0 if you want to finish the program): ");
             int q;
             q = Integer.parseInt(cin.nextLine());
             if (q == 0) {
@@ -171,7 +170,7 @@ public class Main {
     private static List<Company> findByBranch(String catLine, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (it.branch.equals(catLine)) {
+            if (it.branch.equalsIgnoreCase(catLine)) {
                 ans.add(it);
             }
         }
@@ -181,7 +180,7 @@ public class Main {
     private static List<Company> findByActType(String catLine, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (it.activityType.equals(catLine)) {
+            if (it.activityType.equalsIgnoreCase(catLine)) {
                 ans.add(it);
             }
         }
@@ -190,7 +189,7 @@ public class Main {
 
     private static Company findByShortName(String catLine, List<Company> records) {
         for (Company it : records) {
-            if (it.shortName.equals(catLine)) {
+            if (it.shortName.equalsIgnoreCase(catLine)) {
                 return it;
             }
         }
