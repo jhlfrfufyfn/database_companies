@@ -1,33 +1,48 @@
 package com.bsu;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import static java.lang.System.exit;
 
-///TODO: create date format file
 ///TODO: add logger
 ///TODO: add encountering capital symbols
 public class Main {
 
-    //private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     private static final String CSV_FILENAME = "data/input.csv";
     private static final String SETTINGS_FILENAME = "data/settings.txt";
+    private static final String LOG_FILENAME = "data/logfile.txt";
     static SimpleDateFormat dateFormat;
 
     public static void main(String[] args) {
-        /*FileHandler fh = new FileHandler("log.txt");
-        LOGGER.addHandler(fh);
-        LOGGER.info("Program started: "
-                + new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z").format(System.currentTimeMillis())
-                + "\n\n");
-        */
+        LOGGER.setLevel(Level.FINE);
+        File logFile = new File(LOG_FILENAME);
+        FileHandler filehandler;
+
+        try {
+            logFile.createNewFile();
+            filehandler = new FileHandler(LOG_FILENAME, true);
+            filehandler.setLevel(Level.FINE);
+            SimpleFormatter formatter = new SimpleFormatter();
+            filehandler.setFormatter(formatter);
+            LOGGER.addHandler(filehandler);
+            LOGGER.fine("Program started ");
+        } catch (IOException ex) {
+            System.err.println(ex.toString());
+        }
+
         try (Scanner fin = new Scanner(new File(SETTINGS_FILENAME))) {
             String sDateFormat = fin.nextLine();
             dateFormat = new SimpleDateFormat(sDateFormat);
@@ -37,8 +52,6 @@ public class Main {
         }
 
         try (Scanner cin = new Scanner(System.in)) {
-
-
             List<Company> records = new ArrayList<>();
             try (Scanner fin = new Scanner(new File(CSV_FILENAME))) {
                 while (fin.hasNext()) {
@@ -59,7 +72,7 @@ public class Main {
 
     private static void queryCycle(Scanner cin, List<Company> records) throws ParseException {
         while (true) {
-            System.out.println("Enter the query number(entering 0 means the end of the program): \n");
+            System.out.println("Enter the query number(entering 0 means the end of the program): ");
             int q;
             q = Integer.parseInt(cin.nextLine());
             if (q == 0) {
@@ -77,36 +90,42 @@ public class Main {
                     } else {
                         ans.print();
                     }
+                    LOGGER.fine("Query 1, short name: " + catLine +
+                            ", companies found: " + ((ans == Company.VOID_COMPANY) ? "1" : "0") + "\n");
                     break;
                 case 2:
                     System.out.println("Enter the branch: ");
                     catLine = cin.nextLine();
                     list = findByBranch(catLine, records);
-                    System.out.println("Companies found: \n");
+                    System.out.println("Companies found: ");
                     for (Company it : list) {
                         it.print();
                     }
+                    LOGGER.fine("Query 2, branch: " + catLine + ", companies found: " + list.size() + "\n");
                     break;
                 case 3:
                     System.out.println("Enter the activity type: ");
                     catLine = cin.nextLine();
                     list = findByActType(catLine, records);
-                    System.out.println("Companies found: \n");
+                    System.out.println("Companies found: ");
                     for (Company it : list) {
                         it.print();
                     }
+                    LOGGER.fine("Query 3, activity type: " + catLine + ", companies found: " + list.size() + "\n");
                     break;
                 case 4:
                     System.out.println("Enter the dates in two different lines: ");
                     catLine = cin.nextLine();
                     Date date1 = Main.dateFormat.parse(catLine);
-                    catLine = cin.nextLine();
+                    String catLine2 = cin.nextLine();
                     Date date2 = Main.dateFormat.parse(catLine);
                     list = findByFDate(date1, date2, records);
-                    System.out.println("Companies found: \n");
+                    System.out.println("Companies found: ");
                     for (Company it : list) {
                         it.print();
                     }
+                    LOGGER.fine("Query 4, dates: " + catLine + " , " + catLine2
+                            + ", companies found: " + list.size() + "\n");
                     break;
                 case 5:
                     System.out.println("Enter the two numbers: ");
@@ -115,13 +134,15 @@ public class Main {
                     int n1 = Integer.parseInt(nums[0]);
                     int n2 = Integer.parseInt(nums[1]);
                     list = findByEmplNumber(n1, n2, records);
-                    System.out.println("Companies found: \n");
+                    System.out.println("Companies found: ");
                     for (Company it : list) {
                         it.print();
                     }
+                    LOGGER.fine("Query 5, employee numbers: " + n1 + " , " + n2
+                            + ", companies found: " + list.size() + "\n");
                     break;
                 default:
-                    System.out.println("Wrong query number. Try again. \n");
+                    System.out.println("Wrong query number. Try again.");
             }
 
         }

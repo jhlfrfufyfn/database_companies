@@ -12,3 +12,4 @@ out/
 *.iws
 *.log
 src/com/bsu/data/
+/data/logfile.txt.lck

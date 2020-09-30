@@ -1,0 +1,33 @@
+сент. 30, 2020 3:53:39 PM com.bsu.Main main
+INFO: Program started: 2020-09-30 at 15:53:39 MSK
+
+сент. 30, 2020 4:01:12 PM com.bsu.Main main
+FINE: Program started: 2020-09-30 at 16:01:12 MSK
+
+сент. 30, 2020 4:01:21 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: Freezers, companies found: 0
+
+сент. 30, 2020 4:01:42 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: Ulyapshaceli, companies found: 0
+
+сент. 30, 2020 4:01:50 PM com.bsu.Main queryCycle
+FINE: Query 3, activity type: death, companies found: 1
+
+сент. 30, 2020 4:02:02 PM com.bsu.Main queryCycle
+FINE: Query 2, branch: Ulyapshaceli, companies found: 1
+
+сент. 30, 2020 4:02:09 PM com.bsu.Main queryCycle
+FINE: Query 1, short name: atl, companies found: 0
+
+сент. 30, 2020 4:02:44 PM com.bsu.Main main
+FINE: Program started: 2020-09-30 at 16:02:44 MSK
+
+сент. 30, 2020 4:02:52 PM com.bsu.Main queryCycle
+FINE: Query 5, employee numbers: 10 , 100, companies found: 0
+
+сент. 30, 2020 4:02:55 PM com.bsu.Main queryCycle
+FINE: Query 5, employee numbers: 100 , 10000, companies found: 2
+
+сент. 30, 2020 4:03:25 PM com.bsu.Main queryCycle
+FINE: Query 2, branch: Star destroyers, companies found: 1
+
