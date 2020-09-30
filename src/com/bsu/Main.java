@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 ///TODO: create date format file
 ///TODO: add logger
 ///TODO: add encountering capital symbols
@@ -16,6 +18,7 @@ public class Main {
     //private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     private static final String CSV_FILENAME = "data/input.csv";
+    private static final String SETTINGS_FILENAME = "data/settings.txt";
     static SimpleDateFormat dateFormat;
 
     public static void main(String[] args) {
@@ -25,12 +28,16 @@ public class Main {
                 + new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z").format(System.currentTimeMillis())
                 + "\n\n");
         */
-        System.out.println("Enter the date format(example: dd-MM-yyyy): ");
-        String sDateFormat;
+        try (Scanner fin = new Scanner(new File(SETTINGS_FILENAME))) {
+            String sDateFormat = fin.nextLine();
+            dateFormat = new SimpleDateFormat(sDateFormat);
+        } catch (Exception ex) {
+            System.out.println("Error: date format in settings.txt is wrong. Program is terminated.");
+            exit(1);
+        }
 
         try (Scanner cin = new Scanner(System.in)) {
-            sDateFormat = cin.nextLine();
-            dateFormat = new SimpleDateFormat(sDateFormat);
+
 
             List<Company> records = new ArrayList<>();
             try (Scanner fin = new Scanner(new File(CSV_FILENAME))) {
