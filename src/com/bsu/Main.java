@@ -15,7 +15,6 @@ import java.util.logging.SimpleFormatter;
 
 import static java.lang.System.exit;
 
-///TODO: add encountering capital symbols
 public class Main {
 
     private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
@@ -23,6 +22,7 @@ public class Main {
     private static final String CSV_FILENAME = "data/input.csv";
     private static final String SETTINGS_FILENAME = "data/settings.txt";
     private static final String LOG_FILENAME = "data/logfile.txt";
+
     static SimpleDateFormat dateFormat;
 
     public static void main(String[] args) {
