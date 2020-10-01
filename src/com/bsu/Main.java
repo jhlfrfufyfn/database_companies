@@ -31,8 +31,12 @@ public class Main {
         File logFile = new File(LOG_FILENAME);
         FileHandler filehandler;
 
-        CSV_IN_FILENAME = args[0];
-        CSV_OUT_FILENAME = args[1];
+        if (args.length == 2) {
+            CSV_IN_FILENAME = args[0];
+            CSV_OUT_FILENAME = args[1];
+        } else {
+            System.out.println("Default filenames: input.csv, output.txt" + System.lineSeparator());
+        }
 
         try {
             boolean isCreated = logFile.createNewFile();
@@ -90,7 +94,7 @@ public class Main {
                         System.out.println("Enter the short name: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 1, short name: " + catLine;
-                        Company ans = findByShortName(catLine, records);
+                        Company ans = Query.findByShortName(catLine, records);
                         if (ans == Company.VOID_COMPANY) {
                             fout.write("Company not found" + System.lineSeparator());
                         } else {
@@ -104,7 +108,7 @@ public class Main {
                         System.out.println("Enter the branch: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 2, branch: " + catLine;
-                        list = findByBranch(catLine, records);
+                        list = Query.findByBranch(catLine, records);
                         fout.write("Companies found: " + System.lineSeparator());
                         if (list.isEmpty()) {
                             fout.write("NONE" + System.lineSeparator());
@@ -119,7 +123,7 @@ public class Main {
                         System.out.println("Enter the activity type: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 3, activity type: " + catLine;
-                        list = findByActType(catLine, records);
+                        list = Query.findByActType(catLine, records);
                         fout.write("Companies found: " + System.lineSeparator());
                         if (list.isEmpty()) {
                             fout.write("NONE" + System.lineSeparator());
@@ -137,7 +141,7 @@ public class Main {
                         Date date1 = Main.dateFormat.parse(catLine);
                         String catLine2 = cin.nextLine();
                         Date date2 = Main.dateFormat.parse(catLine);
-                        list = findByFDate(date1, date2, records);
+                        list = Query.findByFDate(date1, date2, records);
                         fout.write("Companies found: " + System.lineSeparator());
                         if (list.isEmpty()) {
                             fout.write("NONE" + System.lineSeparator());
@@ -155,7 +159,7 @@ public class Main {
                         int n1 = Integer.parseInt(nums[0]);
                         int n2 = Integer.parseInt(nums[1]);
                         queryInfo = "Query 5, employee numbers: " + n1 + " , " + n2;
-                        list = findByEmplNumber(n1, n2, records);
+                        list = Query.findByEmplNumber(n1, n2, records);
                         fout.write("Companies found: " + System.lineSeparator());
                         if (list.isEmpty()) {
                             fout.write("NONE" + System.lineSeparator());
@@ -173,54 +177,5 @@ public class Main {
         } catch (Exception ex) {
             System.out.println("Error: " + ex.toString());
         }
-    }
-
-    private static List<Company> findByFDate(Date date1, Date date2, List<Company> records) {
-        List<Company> ans = new ArrayList<>();
-        for (Company it : records) {
-            if (date1.before(it.foundationDate) && date2.after(it.foundationDate)) {
-                ans.add(it);
-            }
-        }
-        return ans;
-    }
-
-    private static List<Company> findByEmplNumber(int n1, int n2, List<Company> records) {
-        List<Company> ans = new ArrayList<>();
-        for (Company it : records) {
-            if (n1 <= it.employeeNumber && it.employeeNumber <= n2) {
-                ans.add(it);
-            }
-        }
-        return ans;
-    }
-
-    private static List<Company> findByBranch(String catLine, List<Company> records) {
-        List<Company> ans = new ArrayList<>();
-        for (Company it : records) {
-            if (it.branch.equalsIgnoreCase(catLine)) {
-                ans.add(it);
-            }
-        }
-        return ans;
-    }
-
-    private static List<Company> findByActType(String catLine, List<Company> records) {
-        List<Company> ans = new ArrayList<>();
-        for (Company it : records) {
-            if (it.activityType.equalsIgnoreCase(catLine)) {
-                ans.add(it);
-            }
-        }
-        return ans;
-    }
-
-    private static Company findByShortName(String catLine, List<Company> records) {
-        for (Company it : records) {
-            if (it.shortName.equalsIgnoreCase(catLine)) {
-                return it;
-            }
-        }
-        return Company.VOID_COMPANY;
     }
 }

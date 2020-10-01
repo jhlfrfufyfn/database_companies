@@ -88,3 +88,6 @@ FINE: Program started
 сент. 30, 2020 8:09:38 PM com.bsu.Main queryCycle
 FINE: Query 4, dates: 01-01-1995 , 01-10-2200, companies found: 0
 
+окт. 01, 2020 9:13:22 AM com.bsu.Main main
+FINE: Program started 
+
