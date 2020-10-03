@@ -6,6 +6,10 @@ import java.text.ParseException;
 import java.util.Date;
 
 class Company {
+    private String getNameKey() {
+        return "name";
+    }
+
     static Company VOID_COMPANY;
     String name;
     String shortName;
@@ -19,6 +23,55 @@ class Company {
     String branch;
     String activityType;
     String webPage;
+
+    private String getShortNameKey() {
+        return "shortName";
+    }
+
+    private String getActualizationDateKey() {
+        return "actualizationDate";
+    }
+
+    private String getAddressKey() {
+        return "adress";
+    }
+
+    private String getFoundationDateKey() {
+        return "foundationDate";
+    }
+
+    private String getEmployeeNumberKey() {
+        return "employeeNumber";
+    }
+
+    private String getAuditorKey() {
+        return "auditor";
+    }
+
+    private String getEMailKey() {
+        return "eMail";
+    }
+
+    private String getBranchKey() {
+        return "branch";
+    }
+
+    private String getActivityTypeKey() {
+        return "activityType";
+    }
+
+    private String getWebPageKey() {
+        return "webPage";
+    }
+
+    enum CompanyFields {
+        name(0), shortName(1), actualizationDate(2), address(3),
+        foundationDate(4), employeeNumber(5), auditor(6), phoneNumber(7),
+        eMail(8), branch(9), activityType(10), webPage(11);
+
+        CompanyFields(int i) {
+        }
+    }
 
     Company(String[] aData) throws ParseException {
         name = aData[0];
