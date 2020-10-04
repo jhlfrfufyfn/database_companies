@@ -5,52 +5,65 @@ import java.util.Date;
 import java.util.List;
 
 class Query {
-    static List<Company> findByFDate(Date date1, Date date2, List<Company> records) {
+    static List<Company> findByFDate(Date startDate, Date endDate, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (date1.before(it.foundationDate) && date2.after(it.foundationDate)) {
+            if (startDate.before(it.getFoundationDate()) && endDate.after(it.getFoundationDate())) {
                 ans.add(it);
             }
         }
         return ans;
     }
 
-    static List<Company> findByEmplNumber(int n1, int n2, List<Company> records) {
+    ;
+
+    static List<Company> findByEmplNumber(int lowerBound, int upperBound, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (n1 <= it.employeeNumber && it.employeeNumber <= n2) {
+            if (lowerBound <= it.getEmployeeNumber() && it.getEmployeeNumber() <= upperBound) {
                 ans.add(it);
             }
         }
         return ans;
     }
 
-    static List<Company> findByBranch(String catLine, List<Company> records) {
+    static List<Company> findByBranch(String branch, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (it.branch.equalsIgnoreCase(catLine)) {
+            if (it.getBranch().equalsIgnoreCase(branch)) {
                 ans.add(it);
             }
         }
         return ans;
     }
 
-    static List<Company> findByActType(String catLine, List<Company> records) {
+    static List<Company> findByActType(String activityType, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
-            if (it.activityType.equalsIgnoreCase(catLine)) {
+            if (it.getActivityType().equalsIgnoreCase(activityType)) {
                 ans.add(it);
             }
         }
         return ans;
     }
 
-    static Company findByShortName(String catLine, List<Company> records) {
+    static Company findByShortName(String shortName, List<Company> records) {
         for (Company it : records) {
-            if (it.shortName.equalsIgnoreCase(catLine)) {
+            if (it.getShortName().equalsIgnoreCase(shortName)) {
                 return it;
             }
         }
         return Company.VOID_COMPANY;
+    }
+
+    enum RequestType {
+        REQUEST_BY_SHORT_NAME(1), REQUEST_BY_BRANCH(2),
+        REQUEST_BY_ACTIVITY_TYPE(3), REQUEST_BY_FOUNDATION_DATE(4),
+        REQUEST_BY_EMPLOYEE_NUMBER(5);
+        final int queryNumber;
+
+        RequestType(int i) {
+            this.queryNumber = i;
+        }
     }
 }

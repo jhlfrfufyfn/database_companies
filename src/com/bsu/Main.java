@@ -156,6 +156,9 @@ public class Main {
                         System.out.println("Enter the two numbers: ");
                         catLine = cin.nextLine();
                         String[] nums = catLine.split(" ");
+                        if (nums.length != 2) {
+                            throw new IOException("Error: wrong number of numbers entered in query 5");
+                        }
                         int n1 = Integer.parseInt(nums[0]);
                         int n2 = Integer.parseInt(nums[1]);
                         queryInfo = "Query 5, employee numbers: " + n1 + " , " + n2;
