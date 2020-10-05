@@ -89,8 +89,9 @@ public class Main {
                 String catLine;
                 String queryInfo;
                 List<Company> list;
-                switch (q) {
-                    case 1:
+                Query.RequestType option = Query.RequestType.fromIntValue(q);
+                switch (option) {
+                    case BY_SHORT_NAME:
                         System.out.println("Enter the short name: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 1, short name: " + catLine;
@@ -104,7 +105,7 @@ public class Main {
                                 + ((ans == Company.VOID_COMPANY) ? "1" : "0")
                                 + System.lineSeparator());
                         break;
-                    case 2:
+                    case BY_BRANCH:
                         System.out.println("Enter the branch: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 2, branch: " + catLine;
@@ -119,7 +120,7 @@ public class Main {
                         LOGGER.fine(queryInfo + ", companies found: "
                                 + list.size() + System.lineSeparator());
                         break;
-                    case 3:
+                    case BY_ACTIVITY_TYPE:
                         System.out.println("Enter the activity type: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 3, activity type: " + catLine;
@@ -134,7 +135,7 @@ public class Main {
                         LOGGER.fine(queryInfo + ", companies found: "
                                 + list.size() + System.lineSeparator());
                         break;
-                    case 4:
+                    case BY_FOUNDATION_DATE:
                         System.out.println("Enter the dates in two different lines: ");
                         catLine = cin.nextLine();
                         queryInfo = "Query 4, dates: " + catLine;
@@ -152,7 +153,7 @@ public class Main {
                         LOGGER.fine(queryInfo + " , " + catLine2
                                 + ", companies found: " + list.size() + System.lineSeparator());
                         break;
-                    case 5:
+                    case BY_EMPLOYEE_NUMBER:
                         System.out.println("Enter the two numbers: ");
                         catLine = cin.nextLine();
                         String[] nums = catLine.split(" ");
@@ -173,8 +174,10 @@ public class Main {
                         LOGGER.fine(queryInfo
                                 + ", companies found: " + list.size() + System.lineSeparator());
                         break;
+                    case DEFAULT:
                     default:
                         System.out.println("Wrong query number. Try again.");
+                        break;
                 }
             }
         } catch (Exception ex) {

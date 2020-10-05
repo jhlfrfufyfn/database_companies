@@ -5,6 +5,32 @@ import java.util.Date;
 import java.util.List;
 
 class Query {
+
+    public enum RequestType {
+        BY_SHORT_NAME(1),
+        BY_BRANCH(2),
+        BY_ACTIVITY_TYPE(3),
+        BY_FOUNDATION_DATE(4),
+        BY_EMPLOYEE_NUMBER(5),
+        DEFAULT(0);
+
+        private final int value;
+
+        RequestType(int value) {
+            this.value = value;
+        }
+
+        public static RequestType fromIntValue(int value) {
+            for (RequestType type : values()) {
+                if (type.value == value) {
+                    return type;
+                }
+            }
+            return RequestType.DEFAULT;
+        }
+    }
+
+
     static List<Company> findByFDate(Date startDate, Date endDate, List<Company> records) {
         List<Company> ans = new ArrayList<>();
         for (Company it : records) {
@@ -14,8 +40,6 @@ class Query {
         }
         return ans;
     }
-
-    ;
 
     static List<Company> findByEmplNumber(int lowerBound, int upperBound, List<Company> records) {
         List<Company> ans = new ArrayList<>();
@@ -54,16 +78,5 @@ class Query {
             }
         }
         return Company.VOID_COMPANY;
-    }
-
-    enum RequestType {
-        REQUEST_BY_SHORT_NAME(1), REQUEST_BY_BRANCH(2),
-        REQUEST_BY_ACTIVITY_TYPE(3), REQUEST_BY_FOUNDATION_DATE(4),
-        REQUEST_BY_EMPLOYEE_NUMBER(5);
-        final int queryNumber;
-
-        RequestType(int i) {
-            this.queryNumber = i;
-        }
     }
 }
