@@ -157,7 +157,7 @@ public class Main {
                         catLine = cin.nextLine();
                         String[] nums = catLine.split(" ");
                         if (nums.length != 2) {
-                            throw new IOException("Error: wrong number of numbers entered in query 5");
+                            throw new IllegalArgumentException("Error: wrong number of numbers entered in query 5");
                         }
                         int n1 = Integer.parseInt(nums[0]);
                         int n2 = Integer.parseInt(nums[1]);

@@ -21,9 +21,9 @@ class Company {
     private String activityType;
     private String webPage;
 
-    Company(String[] aData) throws ParseException, IOException {
+    Company(String[] aData) throws ParseException, IllegalArgumentException {
         if (aData.length != 12) {
-            throw new IOException("Error: wrong number of fields in the data");
+            throw new IllegalArgumentException("Error: wrong number of fields in the argument");
         }
         name = aData[0];
         shortName = aData[1];
@@ -43,91 +43,91 @@ class Company {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public String getShortName() {
+    String getShortName() {
         return shortName;
     }
 
-    public void setShortName(String shortName) {
+    void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
-    public Date getActualizationDate() {
+    Date getActualizationDate() {
         return actualizationDate;
     }
 
-    public void setActualizationDate(Date actualizationDate) {
+    void setActualizationDate(Date actualizationDate) {
         this.actualizationDate = actualizationDate;
     }
 
-    public String getAddress() {
+    String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    void setAddress(String address) {
         this.address = address;
     }
 
-    public Date getFoundationDate() {
+    Date getFoundationDate() {
         return foundationDate;
     }
 
-    public void setFoundationDate(Date foundationDate) {
+    void setFoundationDate(Date foundationDate) {
         this.foundationDate = foundationDate;
     }
 
-    public int getEmployeeNumber() {
+    int getEmployeeNumber() {
         return employeeNumber;
     }
 
-    public void setEmployeeNumber(int employeeNumber) {
+    void setEmployeeNumber(int employeeNumber) {
         this.employeeNumber = employeeNumber;
     }
 
-    public String getAuditor() {
+    String getAuditor() {
         return auditor;
     }
 
-    public void setAuditor(String auditor) {
+    void setAuditor(String auditor) {
         this.auditor = auditor;
     }
 
-    public String getPhoneNumber() {
+    String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String geteMail() {
+    String geteMail() {
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    void seteMail(String eMail) {
         this.eMail = eMail;
     }
 
-    public String getBranch() {
+    String getBranch() {
         return branch;
     }
 
-    public void setBranch(String branch) {
+    void setBranch(String branch) {
         this.branch = branch;
     }
 
-    public String getActivityType() {
+    String getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(String activityType) {
+    void setActivityType(String activityType) {
         this.activityType = activityType;
     }
 
-    public String getWebPage() {
+    String getWebPage() {
         return webPage;
     }
 
