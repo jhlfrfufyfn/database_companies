@@ -3,6 +3,7 @@ package com.bsu;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +69,7 @@ public class Main {
             } catch (Exception ex) {
                 System.err.println("Error: " + ex.toString());
             }
-
+            printMenu(System.out);
             queryCycle(cin, records);
         } catch (Exception ex) {
             System.err.println("Error: " + ex.toString());
@@ -184,4 +185,16 @@ public class Main {
             System.out.println("Error: " + ex.toString());
         }
     }
+
+    static void printMenu(PrintStream stream) {
+        stream.println("Query types:");
+        stream.println("1: Find a company by its short name(enter the short name).");
+        stream.println("2: Find the companies by their branch(enter the branch name).");
+        stream.println("3: Find the companies by their activity type.(enter the activity type)");
+        stream.println("4: Find the companies by their foundation date range."
+                + "(enter two dates in a format given in settings.txt)");
+        stream.println("5: Find the companies by their number of employees.(enter the number of employees)");
+        stream.println("Important: first enter just the query type without the parameters.");
+    }
+
 }
