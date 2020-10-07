@@ -22,21 +22,11 @@ class Company {
     private String webPage;
 
     Company(String[] aData) throws ParseException, IllegalArgumentException {
+        this(aData[0], aData[1], Main.dateFormat.parse(aData[2]), aData[3], Main.dateFormat.parse(aData[4]),
+                Integer.parseInt(aData[5]), aData[6], aData[7], aData[8], aData[9], aData[10], aData[11]);
         if (aData.length != 12) {
             throw new IllegalArgumentException("Error: wrong number of fields in the argument");
         }
-        name = aData[0];
-        shortName = aData[1];
-        actualizationDate = Main.dateFormat.parse(aData[2]);
-        address = aData[3];
-        foundationDate = Main.dateFormat.parse(aData[4]);
-        employeeNumber = Integer.parseInt(aData[5]);
-        auditor = aData[6];
-        phoneNumber = aData[7];
-        eMail = aData[8];
-        branch = aData[9];
-        activityType = aData[10];
-        webPage = aData[11];
     }
 
     public String getName() {

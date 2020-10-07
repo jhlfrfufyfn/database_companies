@@ -94,3 +94,18 @@ FINE: Program started
 окт. 05, 2020 4:48:54 PM com.bsu.Main main
 FINE: Program started 
 
+окт. 07, 2020 11:05:51 PM com.bsu.Main main
+FINE: Program started 
+
+окт. 07, 2020 11:10:25 PM com.bsu.Main main
+FINE: Program started 
+
+окт. 07, 2020 11:10:32 PM com.bsu.Main writeQueryResultToLogFile
+FINE: Query 1, short name: bel+az, companies found: 0
+
+окт. 07, 2020 11:11:18 PM com.bsu.Main main
+FINE: Program started 
+
+окт. 07, 2020 11:12:41 PM com.bsu.Main writeQueryResultToLogFile
+FINE: Query 1, short name: bel+az, companies found: 0
+

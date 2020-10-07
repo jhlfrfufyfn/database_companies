@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class Main {
             exit(1);
         }
 
-        try (Scanner cin = new Scanner(System.in)) {
+        try (Scanner cin = new Scanner(System.in); FileWriter fout = new FileWriter(CSV_OUT_FILENAME)) {
             List<Company> records = new ArrayList<>();
             try (Scanner fin = new Scanner(new File(CSV_IN_FILENAME))) {
                 while (fin.hasNext()) {
@@ -70,7 +71,7 @@ public class Main {
                 System.err.println("Error: " + ex.toString());
             }
             printMenu(System.out);
-            queryCycle(cin, records);
+            queryCycle(cin, fout, records);
         } catch (Exception ex) {
             System.err.println("Error: " + ex.toString());
         }
@@ -78,115 +79,130 @@ public class Main {
 
     }
 
-    private static void queryCycle(Scanner cin, List<Company> records) {
-        try (FileWriter fout = new FileWriter(CSV_OUT_FILENAME)) {
-            while (true) {
-                System.out.println("Enter the query number(enter 0 if you want to finish the program): ");
-                int q;
-                q = Integer.parseInt(cin.nextLine());
-                if (q == 0) {
-                    break;
-                }
-                String catLine;
-                String queryInfo;
-                List<Company> list;
-                Query.RequestType option = Query.RequestType.fromIntValue(q);
-                switch (option) {
-                    case BY_SHORT_NAME:
-                        System.out.println("Enter the short name: ");
-                        catLine = cin.nextLine();
-                        queryInfo = "Query 1, short name: " + catLine;
-                        Company ans = Query.findByShortName(catLine, records);
-                        if (ans == Company.VOID_COMPANY) {
-                            fout.write("Company not found" + System.lineSeparator());
-                        } else {
-                            ans.print(fout);
-                        }
-                        LOGGER.fine(queryInfo + ", companies found: "
-                                + ((ans == Company.VOID_COMPANY) ? "1" : "0")
-                                + System.lineSeparator());
-                        break;
-                    case BY_BRANCH:
-                        System.out.println("Enter the branch: ");
-                        catLine = cin.nextLine();
-                        queryInfo = "Query 2, branch: " + catLine;
-                        list = Query.findByBranch(catLine, records);
-                        fout.write("Companies found: " + System.lineSeparator());
-                        if (list.isEmpty()) {
-                            fout.write("NONE" + System.lineSeparator());
-                        }
-                        for (Company it : list) {
-                            it.print(fout);
-                        }
-                        LOGGER.fine(queryInfo + ", companies found: "
-                                + list.size() + System.lineSeparator());
-                        break;
-                    case BY_ACTIVITY_TYPE:
-                        System.out.println("Enter the activity type: ");
-                        catLine = cin.nextLine();
-                        queryInfo = "Query 3, activity type: " + catLine;
-                        list = Query.findByActType(catLine, records);
-                        fout.write("Companies found: " + System.lineSeparator());
-                        if (list.isEmpty()) {
-                            fout.write("NONE" + System.lineSeparator());
-                        }
-                        for (Company it : list) {
-                            it.print(fout);
-                        }
-                        LOGGER.fine(queryInfo + ", companies found: "
-                                + list.size() + System.lineSeparator());
-                        break;
-                    case BY_FOUNDATION_DATE:
-                        System.out.println("Enter the dates in two different lines: ");
-                        catLine = cin.nextLine();
-                        queryInfo = "Query 4, dates: " + catLine;
-                        Date date1 = Main.dateFormat.parse(catLine);
-                        String catLine2 = cin.nextLine();
-                        Date date2 = Main.dateFormat.parse(catLine);
-                        list = Query.findByFDate(date1, date2, records);
-                        fout.write("Companies found: " + System.lineSeparator());
-                        if (list.isEmpty()) {
-                            fout.write("NONE" + System.lineSeparator());
-                        }
-                        for (Company it : list) {
-                            it.print(fout);
-                        }
-                        LOGGER.fine(queryInfo + " , " + catLine2
-                                + ", companies found: " + list.size() + System.lineSeparator());
-                        break;
-                    case BY_EMPLOYEE_NUMBER:
-                        System.out.println("Enter the two numbers: ");
-                        catLine = cin.nextLine();
-                        String[] nums = catLine.split(" ");
-                        if (nums.length != 2) {
-                            throw new IllegalArgumentException("Error: wrong number of numbers entered in query 5");
-                        }
-                        int n1 = Integer.parseInt(nums[0]);
-                        int n2 = Integer.parseInt(nums[1]);
-                        queryInfo = "Query 5, employee numbers: " + n1 + " , " + n2;
-                        list = Query.findByEmplNumber(n1, n2, records);
-                        fout.write("Companies found: " + System.lineSeparator());
-                        if (list.isEmpty()) {
-                            fout.write("NONE" + System.lineSeparator());
-                        }
-                        for (Company it : list) {
-                            it.print(fout);
-                        }
-                        LOGGER.fine(queryInfo
-                                + ", companies found: " + list.size() + System.lineSeparator());
-                        break;
-                    case DEFAULT:
-                    default:
-                        System.out.println("Wrong query number. Try again.");
-                        break;
-                }
+    private static void queryCycle(Scanner cin, FileWriter fout, List<Company> records) throws IOException, ParseException {
+        while (true) {
+            System.out.println("Enter the query number(enter 0 if you want to finish the program): ");
+            int q;
+            q = Integer.parseInt(cin.nextLine());
+            if (q == 0) {
+                break;
             }
-        } catch (Exception ex) {
-            System.out.println("Error: " + ex.toString());
+            String catLine;
+            String queryInfo;
+            List<Company> list;
+            Query.RequestType option = Query.RequestType.fromIntValue(q);
+            switch (option) {
+                case BY_SHORT_NAME:
+                    System.out.println("Enter the short name: ");
+                    catLine = cin.nextLine();
+                    queryInfo = "Query 1, short name: " + catLine;
+                    Company ans = Query.findByShortName(catLine, records);
+                    if (ans == Company.VOID_COMPANY) {
+                        fout.write("Company not found" + System.lineSeparator());
+                    } else {
+                        ans.print(fout);
+                    }
+                    writeQueryResultToLogFile(String.format(
+                            ("%s, companies found: %s%s"),
+                            queryInfo
+                            , ((ans != Company.VOID_COMPANY) ? "1" : "0")
+                            , System.lineSeparator()
+                    ));
+                    break;
+                case BY_BRANCH:
+                    System.out.println("Enter the branch: ");
+                    catLine = cin.nextLine();
+                    queryInfo = "Query 2, branch: " + catLine;
+                    list = Query.findByBranch(catLine, records);
+                    fout.write("Companies found: " + System.lineSeparator());
+                    if (list.isEmpty()) {
+                        fout.write("NONE" + System.lineSeparator());
+                    }
+                    for (Company it : list) {
+                        it.print(fout);
+                    }
+                    writeQueryResultToLogFile(String.format(
+                            ("%s, companies found: %s%s"),
+                            queryInfo
+                            , list.size()
+                            , System.lineSeparator()
+                    ));
+                    break;
+                case BY_ACTIVITY_TYPE:
+                    System.out.println("Enter the activity type: ");
+                    catLine = cin.nextLine();
+                    queryInfo = "Query 3, activity type: " + catLine;
+                    list = Query.findByActType(catLine, records);
+                    fout.write("Companies found: " + System.lineSeparator());
+                    if (list.isEmpty()) {
+                        fout.write("NONE" + System.lineSeparator());
+                    }
+                    for (Company it : list) {
+                        it.print(fout);
+                    }
+                    writeQueryResultToLogFile(String.format(
+                            ("%s, companies found: %s%s"),
+                            queryInfo
+                            , list.size()
+                            , System.lineSeparator()
+                    ));
+                    break;
+                case BY_FOUNDATION_DATE:
+                    System.out.println("Enter the dates in two different lines: ");
+                    catLine = cin.nextLine();
+                    queryInfo = "Query 4, dates: " + catLine;
+                    Date date1 = Main.dateFormat.parse(catLine);
+                    String catLine2 = cin.nextLine();
+                    Date date2 = Main.dateFormat.parse(catLine2);
+                    list = Query.findByFDate(date1, date2, records);
+                    fout.write("Companies found: " + System.lineSeparator());
+                    if (list.isEmpty()) {
+                        fout.write("NONE" + System.lineSeparator());
+                    }
+                    for (Company it : list) {
+                        it.print(fout);
+                    }
+                    writeQueryResultToLogFile(String.format(
+                            ("%s, companies found: %s%s"),
+                            queryInfo
+                            , list.size()
+                            , System.lineSeparator()
+                    ));
+                    break;
+                case BY_EMPLOYEE_NUMBER:
+                    System.out.println("Enter the two numbers: ");
+                    catLine = cin.nextLine();
+                    String[] nums = catLine.split(" ");
+                    if (nums.length != 2) {
+                        throw new IllegalArgumentException("Error: wrong number of numbers entered in query 5");
+                    }
+                    int n1 = Integer.parseInt(nums[0]);
+                    int n2 = Integer.parseInt(nums[1]);
+                    queryInfo = "Query 5, employee numbers: " + n1 + " , " + n2;
+                    list = Query.findByEmplNumber(n1, n2, records);
+                    fout.write("Companies found: " + System.lineSeparator());
+                    if (list.isEmpty()) {
+                        fout.write("NONE" + System.lineSeparator());
+                    }
+                    for (Company it : list) {
+                        it.print(fout);
+                    }
+                    writeQueryResultToLogFile(String.format(
+                            ("%s, companies found: %s%s"),
+                            queryInfo
+                            , list.size()
+                            , System.lineSeparator())
+                    );
+                    break;
+                case DEFAULT:
+                default:
+                    System.out.println("Wrong query number. Try again.");
+                    break;
+            }
         }
     }
 
-    static void printMenu(PrintStream stream) {
+    private static void printMenu(PrintStream stream) {
         stream.println("Query types:");
         stream.println("1: Find a company by its short name(enter the short name).");
         stream.println("2: Find the companies by their branch(enter the branch name).");
@@ -197,4 +213,7 @@ public class Main {
         stream.println("Important: first enter just the query type without the parameters.");
     }
 
+    private static void writeQueryResultToLogFile(String s) {
+        LOGGER.fine(s);
+    }
 }
