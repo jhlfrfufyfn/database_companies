@@ -114,13 +114,7 @@ public class Main {
                     catLine = cin.nextLine();
                     queryInfo = "Query 2, branch: " + catLine;
                     list = Query.findByBranch(catLine, records);
-                    fout.write("Companies found: " + System.lineSeparator());
-                    if (list.isEmpty()) {
-                        fout.write("NONE" + System.lineSeparator());
-                    }
-                    for (Company it : list) {
-                        it.print(fout);
-                    }
+                    printResultingList(fout, list);
                     writeQueryResultToLogFile(String.format(
                             ("%s, companies found: %s%s"),
                             queryInfo
@@ -133,13 +127,7 @@ public class Main {
                     catLine = cin.nextLine();
                     queryInfo = "Query 3, activity type: " + catLine;
                     list = Query.findByActType(catLine, records);
-                    fout.write("Companies found: " + System.lineSeparator());
-                    if (list.isEmpty()) {
-                        fout.write("NONE" + System.lineSeparator());
-                    }
-                    for (Company it : list) {
-                        it.print(fout);
-                    }
+                    printResultingList(fout, list);
                     writeQueryResultToLogFile(String.format(
                             ("%s, companies found: %s%s"),
                             queryInfo
@@ -155,13 +143,7 @@ public class Main {
                     String catLine2 = cin.nextLine();
                     Date date2 = Main.dateFormat.parse(catLine2);
                     list = Query.findByFDate(date1, date2, records);
-                    fout.write("Companies found: " + System.lineSeparator());
-                    if (list.isEmpty()) {
-                        fout.write("NONE" + System.lineSeparator());
-                    }
-                    for (Company it : list) {
-                        it.print(fout);
-                    }
+                    printResultingList(fout, list);
                     writeQueryResultToLogFile(String.format(
                             ("%s, companies found: %s%s"),
                             queryInfo
@@ -180,13 +162,7 @@ public class Main {
                     int n2 = Integer.parseInt(nums[1]);
                     queryInfo = "Query 5, employee numbers: " + n1 + " , " + n2;
                     list = Query.findByEmplNumber(n1, n2, records);
-                    fout.write("Companies found: " + System.lineSeparator());
-                    if (list.isEmpty()) {
-                        fout.write("NONE" + System.lineSeparator());
-                    }
-                    for (Company it : list) {
-                        it.print(fout);
-                    }
+                    printResultingList(fout, list);
                     writeQueryResultToLogFile(String.format(
                             ("%s, companies found: %s%s"),
                             queryInfo
@@ -215,5 +191,15 @@ public class Main {
 
     private static void writeQueryResultToLogFile(String s) {
         LOGGER.fine(s);
+    }
+
+    private static void printResultingList(FileWriter fout, List<Company> list) throws IOException {
+        fout.write("Companies found: " + System.lineSeparator());
+        if (list.isEmpty()) {
+            fout.write("NONE" + System.lineSeparator());
+        }
+        for (Company it : list) {
+            it.print(fout);
+        }
     }
 }
