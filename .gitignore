@@ -11,4 +11,5 @@ out/
 *.ipr
 *.iws
 *.log
-data/
+src/com/bsu/data/
+/data/logfile.txt.lck
