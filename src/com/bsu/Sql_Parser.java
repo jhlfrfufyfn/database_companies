@@ -8,6 +8,10 @@ public class Sql_Parser {
 
     }
 
+    static void getInfo(List<Company> c,) {
+
+    }
+
     public void foo(String cmd) throws IOException {
         String[] words = cmd.split(" ");
         Vector<String> vec = new Vector<String>(Arrays.asList(words));
@@ -33,14 +37,14 @@ public class Sql_Parser {
             throw new IOException("Error: no columns in a select query");
         }
 
-        List<Company.CompanyFields> fields = new ArrayList<>();
+        List<String> fields = new ArrayList<>();
 
         if (columnRange == 2 && words[1].equals("*")) {
-            fields = Arrays.asList(Company.CompanyFields.values());
+            fields = Arrays.asList(Company.FIELD_LIST);
         } else {
             for (int i = 1; i < columnRange; i++) {
-                for (Company.CompanyFields it : Company.CompanyFields.values()) {
-                    if (words[i].equalsIgnoreCase(it.name())) {
+                for (String it : Company.FIELD_LIST) {
+                    if (words[i].equalsIgnoreCase(it)) {
                         fields.add(it);
                     }
                 }
@@ -57,7 +61,7 @@ public class Sql_Parser {
         List<Integer> rowIndexes = new ArrayList<>();
 
         if (!words[columnRange].equalsIgnoreCase("WHERE")) {
-            rowIndexes = Company.namesToIndexes(fields);
+
         }
     }
 }
