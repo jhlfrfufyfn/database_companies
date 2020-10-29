@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 class Company {
     private String getNameKey() {
@@ -93,6 +94,10 @@ class Company {
                 + address + ";" + foundationDate.toString() + ";" + employeeNumber + ";"
                 + auditor + ";" + phoneNumber + ";" + eMail + ";" + branch + ";" + activityType + ";"
                 + webPage + ";" + System.lineSeparator());
+    }
+
+    static List<Integer> namesToIndexes(List<CompanyFields>) {
+
     }
 
 }
