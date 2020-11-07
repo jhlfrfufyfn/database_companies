@@ -57,6 +57,13 @@ class Logic_Parser {
         List<Integer> linkers = new ArrayList<Integer>();
 
         for (int i = 0; i < words.length; i++) {
+            if (words[i].equalsIgnoreCase("AND")) {
+                linkers.add(i);
+            }
+        }
+
+
+        for (int i = 0; i < words.length; i++) {
             if (words[i].equalsIgnoreCase("OR")) {
                 linkers.add(i);
             }

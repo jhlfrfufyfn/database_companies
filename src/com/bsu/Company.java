@@ -9,14 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 class Company {
-    static final String[] FIELD_LIST = {"name", "shortName", "actualizationDate", "address", "foundationDate", "employeeNumber,",
+    static final String[] FIELD_LIST = {"name", "shortName", "actualizationDate", "address", "foundationDate", "employeeNumber",
             "auditor", "phoneNumber", "eMail", "branch", "activityType", "webPage"};
 
-    private String getNameKey() {
-        return FIELD_LIST[0];
-    }
-
     static Company VOID_COMPANY;
+
     String name;
     String shortName;
     Date actualizationDate;
@@ -30,47 +27,147 @@ class Company {
     String activityType;
     String webPage;
 
-    String getShortName() {
+    String getNameKey() {
+        return FIELD_LIST[0];
+    }
+
+    String getShortNameKey() {
         return FIELD_LIST[1];
     }
 
-    Date getActualizationDate() throws ParseException {
-        return Main.dateFormat.parse(FIELD_LIST[2]);
+    public String getShortName() {
+        return shortName;
     }
 
-    String getAddress() {
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    String getActualizationDateKey() throws ParseException {
+        return FIELD_LIST[2];
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getActualizationDate() {
+        return actualizationDate;
+    }
+
+    public void setActualizationDate(Date actualizationDate) {
+        this.actualizationDate = actualizationDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getFoundationDate() {
+        return foundationDate;
+    }
+
+    public void setFoundationDate(Date foundationDate) {
+        this.foundationDate = foundationDate;
+    }
+
+    public int getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(int employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
+    public String getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(String auditor) {
+        this.auditor = auditor;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getWebPage() {
+        return webPage;
+    }
+
+    public void setWebPage(String webPage) {
+        this.webPage = webPage;
+    }
+
+    String getAddressKey() {
         return FIELD_LIST[3];
     }
 
-    Date getFoundationDate() throws ParseException {
-        return Main.dateFormat.parse(FIELD_LIST[4]);
+    String getFoundationDateKey() throws ParseException {
+        return FIELD_LIST[4];
     }
 
-    int getEmployeeNumber() {
-        return Integer.parseInt(FIELD_LIST[5]);
+    String getEmployeeNumberKey() {
+        return FIELD_LIST[5];
     }
 
-    String getAuditor() {
+    String getAuditorKey() {
         return FIELD_LIST[6];
     }
 
-    String getPhoneNumber() {
+    String getPhoneNumberKey() {
         return FIELD_LIST[7];
     }
 
-    String getEMail() {
+    String getEMailKey() {
         return FIELD_LIST[8];
     }
 
-    String getBranch() {
+    String getBranchKey() {
         return FIELD_LIST[9];
     }
 
-    String getActivityType() {
+    String getActivityTypeKey() {
         return FIELD_LIST[10];
     }
 
-    String getWebPage() {
+    String getWebPageKey() {
         return FIELD_LIST[11];
     }
 
