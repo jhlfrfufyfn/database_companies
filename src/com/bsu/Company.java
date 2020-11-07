@@ -30,47 +30,47 @@ class Company {
     String activityType;
     String webPage;
 
-    private String getShortNameKey() {
+    String getShortName() {
         return FIELD_LIST[1];
     }
 
-    private String getActualizationDateKey() {
-        return FIELD_LIST[2];
+    Date getActualizationDate() throws ParseException {
+        return Main.dateFormat.parse(FIELD_LIST[2]);
     }
 
-    private String getAddressKey() {
+    String getAddress() {
         return FIELD_LIST[3];
     }
 
-    private String getFoundationDateKey() {
-        return FIELD_LIST[4];
+    Date getFoundationDate() throws ParseException {
+        return Main.dateFormat.parse(FIELD_LIST[4]);
     }
 
-    private String getEmployeeNumberKey() {
-        return FIELD_LIST[5];
+    int getEmployeeNumber() {
+        return Integer.parseInt(FIELD_LIST[5]);
     }
 
-    private String getAuditorKey() {
+    String getAuditor() {
         return FIELD_LIST[6];
     }
 
-    private String getPhoneNumber() {
+    String getPhoneNumber() {
         return FIELD_LIST[7];
     }
 
-    private String getEMailKey() {
+    String getEMail() {
         return FIELD_LIST[8];
     }
 
-    private String getBranchKey() {
+    String getBranch() {
         return FIELD_LIST[9];
     }
 
-    private String getActivityTypeKey() {
+    String getActivityType() {
         return FIELD_LIST[10];
     }
 
-    private String getWebPageKey() {
+    String getWebPage() {
         return FIELD_LIST[11];
     }
 
@@ -101,7 +101,7 @@ class Company {
         fw.write(name + ";" + shortName + ";" + actualizationDate.toString() + ";"
                 + address + ";" + foundationDate.toString() + ";" + employeeNumber + ";"
                 + auditor + ";" + phoneNumber + ";" + eMail + ";" + branch + ";" + activityType + ";"
-                + webPage + ";";
+                + webPage + ";");
     }
 
     @Override
@@ -178,13 +178,11 @@ class Company {
         CompanyFields(int i) {
         }
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, shortName, actualizationDate, address, foundationDate, employeeNumber,
                 auditor, phoneNumber, eMail, branch, activityType, webPage);
     }
 
-    void print(FileWriter fw) throws IOException {
-        fw.write(this.toString() + System.lineSeparator());
-    }
 }
