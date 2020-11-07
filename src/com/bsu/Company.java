@@ -147,9 +147,7 @@ class Company {
     }
 
     boolean checkShortName(String s) {
-        if (s.equalsIgnoreCase(shortName)) {
-
-        }
+        return s.equalsIgnoreCase(shortName);
     }
 
     enum CompanyFields {
