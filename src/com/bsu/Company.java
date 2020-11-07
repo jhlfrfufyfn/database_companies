@@ -3,148 +3,102 @@ package com.bsu;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 class Company {
+    static final String[] FIELD_LIST = {"name", "shortName", "actualizationDate", "address", "foundationDate", "employeeNumber,",
+            "auditor", "phoneNumber", "eMail", "branch", "activityType", "webPage"};
+
+    private String getNameKey() {
+        return FIELD_LIST[0];
+    }
+
     static Company VOID_COMPANY;
-    private String name;
-    private String shortName;
-    private Date actualizationDate;
-    private String address;
-    private Date foundationDate;
-    private int employeeNumber;
-    private String auditor;
-    private String phoneNumber;
-    private String eMail;
-    private String branch;
-    private String activityType;
-    private String webPage;
+    String name;
+    String shortName;
+    Date actualizationDate;
+    String address;
+    Date foundationDate;
+    int employeeNumber;
+    String auditor;
+    String phoneNumber;
+    String eMail;
+    String branch;
+    String activityType;
+    String webPage;
 
-    Company(String[] aData) throws ParseException, IllegalArgumentException {
-        this(aData[0], aData[1], Main.dateFormat.parse(aData[2]), aData[3], Main.dateFormat.parse(aData[4]),
-                Integer.parseInt(aData[5]), aData[6], aData[7], aData[8], aData[9], aData[10], aData[11]);
-        if (aData.length != 12) {
-            throw new IllegalArgumentException("Error: wrong number of fields in the argument");
-        }
+    private String getShortNameKey() {
+        return FIELD_LIST[1];
     }
 
-    public String getName() {
-        return name;
+    private String getActualizationDateKey() {
+        return FIELD_LIST[2];
     }
 
-    void setName(String name) {
-        this.name = name;
+    private String getAddressKey() {
+        return FIELD_LIST[3];
     }
 
-    String getShortName() {
-        return shortName;
+    private String getFoundationDateKey() {
+        return FIELD_LIST[4];
     }
 
-    void setShortName(String shortName) {
-        this.shortName = shortName;
+    private String getEmployeeNumberKey() {
+        return FIELD_LIST[5];
     }
 
-    Date getActualizationDate() {
-        return actualizationDate;
+    private String getAuditorKey() {
+        return FIELD_LIST[6];
     }
 
-    void setActualizationDate(Date actualizationDate) {
-        this.actualizationDate = actualizationDate;
+    private String getPhoneNumber() {
+        return FIELD_LIST[7];
     }
 
-    String getAddress() {
-        return address;
+    private String getEMailKey() {
+        return FIELD_LIST[8];
     }
 
-    void setAddress(String address) {
-        this.address = address;
+    private String getBranchKey() {
+        return FIELD_LIST[9];
     }
 
-    Date getFoundationDate() {
-        return foundationDate;
+    private String getActivityTypeKey() {
+        return FIELD_LIST[10];
     }
 
-    void setFoundationDate(Date foundationDate) {
-        this.foundationDate = foundationDate;
-    }
-
-    int getEmployeeNumber() {
-        return employeeNumber;
-    }
-
-    void setEmployeeNumber(int employeeNumber) {
-        this.employeeNumber = employeeNumber;
-    }
-
-    String getAuditor() {
-        return auditor;
-    }
-
-    void setAuditor(String auditor) {
-        this.auditor = auditor;
-    }
-
-    String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    String geteMail() {
-        return eMail;
-    }
-
-    void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    String getBranch() {
-        return branch;
-    }
-
-    void setBranch(String branch) {
-        this.branch = branch;
-    }
-
-    String getActivityType() {
-        return activityType;
-    }
-
-    void setActivityType(String activityType) {
-        this.activityType = activityType;
-    }
-
-    String getWebPage() {
-        return webPage;
-    }
-
-    Company(String name, String shortName, Date actualizationDate, String address, Date foundationDate,
-            int employeeNumber, String auditor, String phoneNumber, String eMail, String branch, String activityType,
-            String webPage) {
-        this.name = name;
-        this.shortName = shortName;
-        this.actualizationDate = actualizationDate;
-        this.address = address;
-        this.foundationDate = foundationDate;
-        this.employeeNumber = employeeNumber;
-        this.auditor = auditor;
-        this.phoneNumber = phoneNumber;
-        this.eMail = eMail;
-        this.branch = branch;
-        this.activityType = activityType;
-        this.webPage = webPage;
-    }
-
-    public void setWebPage(String webPage) {
-        this.webPage = webPage;
+    private String getWebPageKey() {
+        return FIELD_LIST[11];
     }
 
     @Override
     public String toString() {
         return name + ";" + shortName + ";" + actualizationDate.toString() + ";"
+                + address + ";" + foundationDate.toString() + ";" + employeeNumber + ";"
+                + auditor + ";" + phoneNumber + ";" + eMail + ";" + branch + ";" + activityType + ";"
+                + webPage + ";";
+    }
+
+    Company(String[] aData) throws ParseException {
+        name = aData[0];
+        shortName = aData[1];
+        actualizationDate = Main.dateFormat.parse(aData[2]);
+        address = aData[3];
+        foundationDate = Main.dateFormat.parse(aData[4]);
+        employeeNumber = Integer.parseInt(aData[5]);
+        auditor = aData[6];
+        phoneNumber = aData[7];
+        eMail = aData[8];
+        branch = aData[9];
+        activityType = aData[10];
+        webPage = aData[11];
+    }
+
+    void print(FileWriter fw) throws IOException {
+        fw.write(name + ";" + shortName + ";" + actualizationDate.toString() + ";"
                 + address + ";" + foundationDate.toString() + ";" + employeeNumber + ";"
                 + auditor + ";" + phoneNumber + ";" + eMail + ";" + branch + ";" + activityType + ";"
                 + webPage + ";";
@@ -169,6 +123,61 @@ class Company {
                 Objects.equals(webPage, company.webPage);
     }
 
+    public String[] getFields(List<String> list, Company c) {
+        List<String> ans = new ArrayList<>();
+        for (String str : list) {
+            if (str.equalsIgnoreCase(FIELD_LIST[0])) {
+                ans.add(c.name);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[1])) {
+                ans.add(c.shortName);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[2])) {
+                ans.add(c.actualizationDate.toString());
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[3])) {
+                ans.add(c.address);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[4])) {
+                ans.add(c.foundationDate.toString());
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[5])) {
+                ans.add(Integer.toString(c.employeeNumber));
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[6])) {
+                ans.add(c.auditor);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[7])) {
+                ans.add(c.phoneNumber);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[8])) {
+                ans.add(c.eMail);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[9])) {
+                ans.add(c.branch);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[10])) {
+                ans.add(c.activityType);
+            }
+            if (str.equalsIgnoreCase(FIELD_LIST[11])) {
+                ans.add(c.webPage);
+            }
+        }
+        return (String[]) ans.toArray();
+    }
+
+    boolean checkShortName(String s) {
+        return s.equalsIgnoreCase(shortName);
+    }
+
+    enum CompanyFields {
+        name(0), shortName(1), actualizationDate(2), address(3),
+        foundationDate(4), employeeNumber(5), auditor(6), phoneNumber(7),
+        eMail(8), branch(9), activityType(10), webPage(11);
+
+        CompanyFields(int i) {
+        }
+    }
     @Override
     public int hashCode() {
         return Objects.hash(name, shortName, actualizationDate, address, foundationDate, employeeNumber,
