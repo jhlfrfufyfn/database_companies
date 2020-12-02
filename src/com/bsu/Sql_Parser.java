@@ -126,17 +126,17 @@ public class Sql_Parser {
         List<Company> result = new ArrayList<>();
         for (Company comp : records) {
             if (requestType == 1) {
-                if (Logic_Parser.ParseStringExpression(logicalExpArray, comp.shortName, "shortName")) {
+                if (Logic_Parser.parseStringExpression(logicalExpArray, comp.shortName, "shortName")) {
                     result.add(comp);
                 }
             }
             if (requestType == 2) {
-                if (Logic_Parser.ParseNumberExpression(logicalExpArray, comp.employeeNumber, "employeeNumber")) {
+                if (Logic_Parser.parseNumberExpression(logicalExpArray, comp.employeeNumber, "employeeNumber")) {
                     result.add(comp);
                 }
             }
             if (requestType == 3) {
-                if (Logic_Parser.ParseStringExpression(logicalExpArray, comp.activityType, "activityType")) {
+                if (Logic_Parser.parseStringExpression(logicalExpArray, comp.activityType, "activityType")) {
                     result.add(comp);
                 }
             }

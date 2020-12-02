@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 class Logic_Parser {
-    static boolean ParseStringExpression(String[] words, String correctName, String specificName) {
+    static boolean parseStringExpression(String[] words, String correctName, String specificName) {
         List<Integer> linkers = new ArrayList<Integer>();
 
         for (int i = 0; i < words.length; i++) {
@@ -53,7 +53,7 @@ class Logic_Parser {
         return false;
     }
 
-    static boolean ParseNumberExpression(String[] words, int correctNumber, String specificName) {
+    static boolean parseNumberExpression(String[] words, int correctNumber, String specificName) {
         List<Integer> linkers = new ArrayList<Integer>();
 
         for (int i = 0; i < words.length; i++) {

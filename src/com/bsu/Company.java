@@ -268,9 +268,9 @@ class Company {
     }
 
     enum CompanyFields {
-        name(0), shortName(1), actualizationDate(2), address(3),
-        foundationDate(4), employeeNumber(5), auditor(6), phoneNumber(7),
-        eMail(8), branch(9), activityType(10), webPage(11);
+        NAME(0), SHORT_NAME(1), ACTUALIZATION_DATE(2), ADDRESS(3),
+        FOUNDATION_DATE(4), EMPLOYEE_NUMBER(5), AUDITOR(6), PHONE_NUMBER(7),
+        E_MAIL(8), BRANCH(9), ACTIVITY_TYPE(10), WEB_PAGE(11);
 
         CompanyFields(int i) {
         }
