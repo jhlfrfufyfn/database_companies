@@ -60,7 +60,8 @@ public class Main {
             exit(1);
         }
 
-        try (Scanner cin = new Scanner(System.in); FileWriter fout = new FileWriter(CSV_OUT_FILENAME)) {
+        try (Scanner cin = new Scanner(System.in); FileWriter fout = new FileWriter(CSV_OUT_FILENAME)
+             ; Scanner sc = new Scanner(new File("data/requests.txt"))) {
             List<Company> records = new ArrayList<>();
             try (Scanner fin = new Scanner(new File(CSV_IN_FILENAME))) {
                 while (fin.hasNext()) {
@@ -69,6 +70,14 @@ public class Main {
                 }
             } catch (Exception ex) {
                 System.err.println("Error: " + ex.toString());
+            }
+
+            int fileCounter = 1;
+            while (sc.hasNext()) {
+                FileWriter fw = new FileWriter(new File("data/request" + Integer.toString(fileCounter++)));
+                String line = sc.nextLine();
+                Sql_Parser.processQuery(line, records, fw);
+                fw.close();
             }
             printMenu(System.out);
             queryCycle(cin, fout, records);
